@@ -1,0 +1,20 @@
+{
+    "response": 0,
+    "message": "no",
+    "data": {
+        "broker": [
+            {
+                "billNum": "1",
+                "total": "我是測試資料",
+            },
+            {
+                "billNum": "2",
+                "total": "我是測試資料",
+            },
+            {
+                "billNum": "3",
+                "total": "我是測試資料",
+            }
+        ]
+    }
+}
