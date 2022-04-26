@@ -13,6 +13,8 @@ class ListViewController: UITableViewController {
         AppService.shared.brokers
     }
     
+    var selectedRow: IndexPath?
+    
     @IBAction func rightBarBtnAction(_ sender: Any) {
         AppService.shared.save()
     }
@@ -20,15 +22,15 @@ class ListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "我是標題"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
-        
         AppService.shared.loadData()
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell")!
+        
+        selectedRow = indexPath
         
         var content = cell.defaultContentConfiguration()
         content.image = UIImage(systemName: "star")
@@ -42,6 +44,10 @@ class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return brokers?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "detailSegue", sender: self)
     }
     
     override func tableView(_ tableView: UITableView,
@@ -74,6 +80,15 @@ class ListViewController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [insertAction])
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailSegue",
+           let detailVC = segue.destination as? DetailViewController,
+           let unWrapRow = selectedRow {
+            
+            let broker = brokers![unWrapRow.row]
+            detailVC.broker = broker
+        }
+    }
     
 }
 

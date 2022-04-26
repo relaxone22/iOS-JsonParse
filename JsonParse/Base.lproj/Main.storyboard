@@ -3,11 +3,12 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--列表-->
         <scene sceneID="To2-QV-dt0">
             <objects>
                 <tableViewController id="g7q-uD-ib8" customClass="ListViewController" customModule="JsonParse" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="x4a-Jk-n6W">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" id="x4a-Jk-n6W">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x4a-Jk-n6W" id="jBc-BN-Bqx">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="356" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -30,17 +31,69 @@
                             <outlet property="delegate" destination="g7q-uD-ib8" id="gye-ZY-XLe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="4hq-CP-V5m">
+                    <navigationItem key="navigationItem" title="列表" id="4hq-CP-V5m">
                         <barButtonItem key="rightBarButtonItem" title="保存" id="uVN-W6-fs3">
                             <connections>
                                 <action selector="rightBarBtnAction:" destination="g7q-uD-ib8" id="WPe-eK-aIb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="eNW-bm-dB4" kind="show" identifier="detailSegue" id="3RA-Xc-PW2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wvR-OP-z5x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-746" y="-1637"/>
+        </scene>
+        <!--明細-->
+        <scene sceneID="zFa-gK-okp">
+            <objects>
+                <viewController id="eNW-bm-dB4" customClass="DetailViewController" customModule="JsonParse" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HDe-n6-chr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="我是內文" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wXT-bc-kEU">
+                                <rect key="frame" x="20" y="375" width="374" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="gIM-Uj-WaT"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我是單號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTD-n6-veS">
+                                <rect key="frame" x="157" y="260" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Dwn-2h-Q5O"/>
+                                    <constraint firstAttribute="width" constant="100" id="IhI-jo-66z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Tzt-zi-gvw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bTD-n6-veS" firstAttribute="top" secondItem="Tzt-zi-gvw" secondAttribute="top" constant="172" id="6xm-yn-Xwc"/>
+                            <constraint firstItem="bTD-n6-veS" firstAttribute="centerX" secondItem="Tzt-zi-gvw" secondAttribute="centerX" id="S70-Nq-vSO"/>
+                            <constraint firstItem="wXT-bc-kEU" firstAttribute="centerY" secondItem="Tzt-zi-gvw" secondAttribute="centerY" id="SAg-ac-zUx"/>
+                            <constraint firstItem="wXT-bc-kEU" firstAttribute="leading" secondItem="Tzt-zi-gvw" secondAttribute="leading" constant="20" id="Zhm-Je-eVK"/>
+                            <constraint firstItem="Tzt-zi-gvw" firstAttribute="trailing" secondItem="wXT-bc-kEU" secondAttribute="trailing" constant="20" id="ohQ-pK-Suy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="明細" id="H7e-bD-8AD"/>
+                    <connections>
+                        <outlet property="content" destination="wXT-bc-kEU" id="QS4-nd-Jal"/>
+                        <outlet property="name" destination="bTD-n6-veS" id="tOK-5k-3do"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DoZ-Zj-hmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="76.811594202898561" y="-1629.2410714285713"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="T4h-ey-Rnp">
@@ -60,6 +113,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
